@@ -41,7 +41,8 @@
     0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
   /* svg */
   --start-svg-color: #afb1b8;
-  /* cubic  */
+  /* Animation  */
+  --time: 250ms;
   --cubic: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -164,11 +165,26 @@ p {
 }
 
 .menu-link {
+  position: relative;
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
 
   color: var(--link-color);
+  transition: color var(--time) var(--cubic);
+}
+
+.menu-link.current::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translatey(1px);
+  width: 100%;
+  height: 4px;
+  border: 2px;
+  border-radius: 2px;
+  background-color: var(--link-alternative-color);
 }
 
 .menu-link:hover,
@@ -197,6 +213,8 @@ p {
 
   padding-top: 32px;
   padding-bottom: 32px;
+
+  transition: color var(--time) var(--cubic);
 }
 
 .header-address:hover,
@@ -207,6 +225,7 @@ p {
 .header-svg {
   margin-right: 10px;
   fill: currentColor;
+  transition: fill var(--time) var(--cubic);
 }
 
 .header-address:hover .header-svg,
@@ -275,6 +294,9 @@ p {
   display: block;
   margin: 0 auto;
   padding: 10px 32px;
+
+  transition: color var(--time) var(--cubic),
+    background-color var(--time) var(--cubic);
 }
 
 .btn:hover,
@@ -366,6 +388,28 @@ p {
   border-radius: 4px;
 }
 
+.do-thumb {
+  position: relative;
+}
+
+.do-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--text-secondary-alternative-color);
+
+  text-transform: uppercase;
+
+  background-color: rgba(47, 48, 58, 0.8);
+}
 .team {
   background-color: var(--team-background-color);
 }
@@ -396,6 +440,8 @@ p {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+
+  transition: background-color var(--time) var(--cubic);
 }
 
 .soc-svg {
@@ -403,6 +449,7 @@ p {
   width: 20px;
   height: 20px;
   fill: var(--start-svg-color);
+  transition: fill var(--time) var(--cubic);
 }
 
 .soc-link:hover,
@@ -431,11 +478,13 @@ p {
   border: 1px solid #afb1b8;
   border-radius: 4px;
   /* padding: 16px 32px; */
+  transition: border-color var(--time) var(--cubic);
 }
 
 .client-svg {
   display: block;
   fill: #afb1b8;
+  transition: fill var(--time) var(--cubic);
 }
 
 .client-link:hover,
@@ -478,6 +527,10 @@ p {
 
   border: var(--button-border);
   border-radius: var(--button-radius);
+
+  transition-property: color, background-color, box-shadow;
+  transition-duration: var(--time);
+  transition-timing-function: var(--cubic);
 }
 
 .btn-portfolio:hover,
@@ -550,7 +603,11 @@ p {
 
   transform: translatey(101%);
 
-  transition: transform 250ms var(--cubic);
+  transition: transform var(--time) var(--cubic);
+}
+
+.card-link {
+  transition: box-shadow var(--time) var(--cubic);
 }
 
 .card-link:hover .card-overlay,
@@ -609,6 +666,8 @@ p {
   letter-spacing: 0.03em;
 
   color: var(--link-secondary-alternative-color);
+
+  transition: color var(--time) var(--cubic);
 }
 
 .footer-link:hover,
@@ -641,4 +700,75 @@ p {
 
 .connect-list .soc-svg {
   fill: var(--background-color);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  opacity: 1;
+
+  transition: opacity 3s linear;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 528px;
+  height: 581px;
+  background-color: var(--background-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1) rotate(720deg);
+
+  transition: transform 1s var(--cubic), background-color 500ms var(--cubic);
+}
+
+.btn-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  color: #000000;
+  background: var(--background-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50% 50%;
+
+  cursor: pointer;
+  transition: color var(--time) var(--cubic);
+}
+
+.icon-close {
+  fill: currentColor;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+  color: var(--btn-background-secondary-color);
 }
