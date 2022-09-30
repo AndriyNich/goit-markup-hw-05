@@ -41,6 +41,8 @@
     0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
   /* svg */
   --start-svg-color: #afb1b8;
+  /* cubic  */
+  --cubic: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .list-none {
@@ -508,7 +510,8 @@ p {
   padding: 20px 24px;
 }
 
-.card-link:hover {
+.card-link:hover,
+.card-link:focus {
   box-shadow: var(--card-shadow);
 }
 
@@ -527,6 +530,40 @@ p {
   font-size: 16px;
   line-height: 1.88;
   letter-spacing: 0.03em;
+}
+
+.card-thumb {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+
+  background-color: rgba(33, 150, 243, 0.9);
+
+  padding: 63px 24px;
+
+  transform: translatey(101%);
+
+  transition: transform 250ms var(--cubic);
+}
+
+.card-link:hover .card-overlay,
+.card-link:focus .card-overlay {
+  transform: translatey(0%);
+}
+
+.card-overlay-text {
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+
+  color: var(--text-secondary-alternative-color);
 }
 
 /* Section Footer */
