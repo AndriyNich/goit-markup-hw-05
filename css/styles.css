@@ -713,7 +713,7 @@ p {
 
   opacity: 1;
 
-  transition: opacity 3s linear;
+  transition: opacity 250ms linear;
 }
 
 .backdrop.is-hidden {
@@ -738,9 +738,9 @@ p {
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 
-  transform: translate(-50%, -50%) scale(1) rotate(720deg);
+  transform: translate(-50%, -50%) scale(1) rotate(360deg);
 
-  transition: transform 1s var(--cubic), background-color 500ms var(--cubic);
+  transition: transform 500ms var(--cubic), background-color 500ms var(--cubic);
 }
 
 .btn-close {
